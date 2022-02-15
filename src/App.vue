@@ -1,12 +1,27 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div class="post" v-for="post in posts" :key="post.id">
+      <h2>{{ post.title }}</h2>
+      <p>{{post.body}}</p>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  data: () => ({
+    posts: [],
+  }),
+  async mounted() {
+    const res = await fetch(
+        "https://jsonplaceholder.typicode.com/posts?_limit=3"
+    );
+    const posts = await res.json();
+    this.posts = posts;
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
@@ -15,6 +30,16 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  margin: 60px auto;
+  width: 400px;
+}
+
+.post{
+  border: 2px solid black;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  text-align: left;
+  padding: 10px;
 }
 
 #nav {
