@@ -2,7 +2,7 @@
   <div id="app">
     <post-form />
     <h1>{{ postsCount }}</h1>
-    <div class="post" v-for="post in validPosts" :key="post.id">
+    <div class="post" v-for="post in allPosts" :key="post.id">
       <h2>{{ post.title }}</h2>
       <p>{{ post.body }}</p>
     </div>
@@ -25,15 +25,15 @@ export default {
   //   }
   // },
 
-  computed: mapGetters(["validPosts", "postsCount"]),
+  computed: mapGetters(["allPosts", "postsCount"]),
   methods: mapActions(["fetchPosts"]),
   components: {
     postForm
   },
 
   async mounted() {
-    // this.$store.dispatch('fetchPosts')
-    this.fetchPosts(1);
+    await this.$store.dispatch('fetchPosts')
+    // this.fetchPosts(5);
   },
 };
 </script>

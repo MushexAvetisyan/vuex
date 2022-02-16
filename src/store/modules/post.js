@@ -9,14 +9,14 @@ export default {
     allPosts(state) {
       return state.posts
     },
-    postsCount(state, getters) {
-      return <getters className="validPosts"></getters>.length
+    postsCount(state) {
+      return state.posts.length
     },
-    validPosts(state) {
-      return state.posts.filter(p => {
-        return p.title && p.body
-      })
-    }
+    // validPosts(state) {
+    //   return state.posts.filter(p => {
+    //     return p.title && p.body
+    //   })
+    // }
   },
 
 

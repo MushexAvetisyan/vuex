@@ -18,13 +18,16 @@ export default {
   }),
   methods: {
     ...mapMutations(['createPost']),
+
     submit() {
-      this.createPost({
-        title: this.title,
-        body: this.body,
-        id: Date.now()
-      })
-      this.title = this.body = "";
+      if(this.title && this.body) {
+        this.createPost({
+          title: this.title,
+          body: this.body,
+          id: Date.now()
+        })
+        this.title = this.body = "";
+      }
     }
   }
 }
