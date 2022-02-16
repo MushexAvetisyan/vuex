@@ -1,29 +1,44 @@
 <template>
   <div id="app">
-    <div class="post" v-for="post in posts" :key="post.id">
+    <post-form />
+    <h1>{{ postsCount }}</h1>
+    <div class="post" v-for="post in validPosts" :key="post.id">
       <h2>{{ post.title }}</h2>
-      <p>{{post.body}}</p>
+      <p>{{ post.body }}</p>
     </div>
     <router-view />
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+import postForm from "@/components/postForm";
+
 export default {
-  data: () => ({
-    posts: [],
-  }),
+  // data: () => ({
+  //   posts: [],
+  // }),
+
+  // computed: {
+  //   allPosts() {
+  //     return this.$store.getters.allPosts
+  //   }
+  // },
+
+  computed: mapGetters(["validPosts", "postsCount"]),
+  methods: mapActions(["fetchPosts"]),
+  components: {
+    postForm
+  },
+
   async mounted() {
-    const res = await fetch(
-        "https://jsonplaceholder.typicode.com/posts?_limit=3"
-    );
-    const posts = await res.json();
-    this.posts = posts;
+    // this.$store.dispatch('fetchPosts')
+    this.fetchPosts(1);
   },
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -34,7 +49,7 @@ export default {
   width: 400px;
 }
 
-.post{
+.post {
   border: 2px solid black;
   border-radius: 5px;
   margin-bottom: 1rem;

@@ -1,0 +1,33 @@
+VueX
+
+Action-Object
+Mutation-funkcii kotorie napryamuyu budut izmenyat store
+state-gde mi obredelyaem iznachalnie dannie
+getters-transformirovat dannie i poluchat is store
+modules-
+
+
+
+  // computed: {
+  //   allPosts() {
+  //     return this.$store.getters.allPosts
+  //   }
+  // },
+
+
+
+
+
+
+import {
+mapState
+mapMutations
+mapGetters
+mapActions
+} from vuex
+
+
+  computed: mapGetters(["allPosts"]),
+
+
+
